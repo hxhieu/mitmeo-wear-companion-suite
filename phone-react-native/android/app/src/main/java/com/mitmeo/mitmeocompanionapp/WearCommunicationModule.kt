@@ -1,4 +1,4 @@
-package com.com.mitmeo.mitmeocompanionapp
+package com.mitmeo.mitmeocompanionapp
 
 import android.util.Log
 import com.facebook.react.bridge.ReactApplicationContext

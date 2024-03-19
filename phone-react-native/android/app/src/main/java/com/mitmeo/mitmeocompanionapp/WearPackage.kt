@@ -1,4 +1,4 @@
-package com.com.mitmeo.mitmeocompanionapp
+package com.mitmeo.mitmeocompanionapp
 
 import android.view.View
 import com.facebook.react.ReactPackage
