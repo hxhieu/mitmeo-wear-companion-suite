@@ -1,4 +1,4 @@
-package com.mitmeo.mitmeocompanionapp
+package com.mitmeo.mitmeocompanionapp.rn
 
 import android.util.Log
 import com.facebook.react.bridge.ReactApplicationContext
@@ -8,7 +8,6 @@ import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.CapabilityInfo
 import com.google.android.gms.wearable.Wearable
-
 
 private const val MITMEO_COMPANION_WEAR_CAPABILITY = "mitmeo_companion_wear"
 private const val MITMEO_COMPANION_MESSAGING_PATH = "/mitmeo-companion-messaging"
@@ -44,7 +43,10 @@ class WearCommunicationModule(reactContext: ReactApplicationContext) :
                     Log.d(name, "requestBatteryInfo() success sent ${n.displayName}")
                 }
                 addOnFailureListener { e ->
-                    Log.e(name, "requestBatteryInfo() failed sent ${n.displayName}\nerr: ${e.message}")
+                    Log.e(
+                        name,
+                        "requestBatteryInfo() failed sent ${n.displayName}\nerr: ${e.message}"
+                    )
                 }
             }
         }

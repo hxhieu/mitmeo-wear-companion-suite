@@ -1,4 +1,4 @@
-package com.mitmeo.mitmeocompanionwear.presentation
+package com.mitmeo.mitmeocompanionwear.service
 
 import android.content.Intent
 import android.content.IntentFilter
@@ -10,11 +10,11 @@ import com.google.android.gms.wearable.WearableListenerService
 
 private const val MESSAGE_BATTERY_INFO = "battery_info"
 
-class DataLayerListenerService : WearableListenerService() {
+class MessagingService : WearableListenerService() {
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
         super.onMessageReceived(messageEvent)
-        Log.d("DataLayerListenerService", messageEvent.path)
+        Log.d("MessagingService", messageEvent.path)
         val msg = messageEvent.data.toString(Charsets.UTF_8)
         val toast = Toast.makeText(this.applicationContext, msg, Toast.LENGTH_LONG)
 

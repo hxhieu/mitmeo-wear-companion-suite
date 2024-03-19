@@ -1,11 +1,10 @@
-package com.mitmeo.mitmeocompanionapp
+package com.mitmeo.mitmeocompanionapp.service
 
-import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.WearableListenerService
 
-class DataLayerListenerService : WearableListenerService() {
+class MessagingService : WearableListenerService() {
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
         super.onMessageReceived(messageEvent)

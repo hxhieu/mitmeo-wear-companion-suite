@@ -11,7 +11,7 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme">
 
-        <service android:name=".DataLayerListenerService"
+        <service android:name=".service.MessagingService"
             android:exported="true"
             tools:ignore="ExportedService" >
             <intent-filter>
