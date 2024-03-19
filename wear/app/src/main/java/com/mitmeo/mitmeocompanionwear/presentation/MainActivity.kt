@@ -27,7 +27,12 @@ import androidx.wear.compose.material.TimeText
 import com.mitmeo.mitmeocompanionwear.R
 import com.mitmeo.mitmeocompanionwear.presentation.theme.MitmeocompanionwearTheme
 
+// TODO: Better way?
+var mainActivityInstance: MainActivity = MainActivity()
+
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
 
@@ -38,6 +43,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             WearApp("Android")
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainActivityInstance = this
     }
 }
 

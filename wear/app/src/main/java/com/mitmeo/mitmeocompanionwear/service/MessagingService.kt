@@ -7,6 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.WearableListenerService
+import com.mitmeo.mitmeocompanionwear.service.models.BatteryInfo
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 private const val MESSAGE_BATTERY_INFO = "battery_info"
 
@@ -29,6 +32,9 @@ class MessagingService : WearableListenerService() {
                     val scale: Int = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
                     level * 100 / scale.toFloat()
                 }
+                // TODO: DI
+                val batteryInfo = BatteryInfo()
+                Messenger().send(Json.encodeToString(batteryInfo).toByteArray(Charsets.UTF_8))
                 toast.setText(batteryPct.toString())
             }
         }
