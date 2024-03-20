@@ -1,4 +1,4 @@
-package com.mitmeo.mitmeocompanionwear.service
+package com.mitmeo.mitmeocompanionapp.service
 
 import android.app.Activity
 import android.util.Log
@@ -6,14 +6,15 @@ import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.CapabilityInfo
 import com.google.android.gms.wearable.Wearable
-import com.mitmeo.mitmeocompanionwear.MITMEO_COMPANION_MESSAGING_PATH
-import com.mitmeo.mitmeocompanionwear.MITMEO_COMPANION_WEAR_CAPABILITY
+import com.mitmeo.mitmeocompanionapp.MITMEO_COMPANION_MESSAGING_PATH
+import com.mitmeo.mitmeocompanionapp.MITMEO_COMPANION_WEAR_CAPABILITY
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class Messenger(private  val activity: Activity) {
+class Messenger(private val activity: Activity) {
     private val messageClient by lazy { Wearable.getMessageClient(activity) }
     private val capabilityClient by lazy { Wearable.getCapabilityClient(activity) }
+
     private val logName = MITMEO_COMPANION_WEAR_CAPABILITY
 
     fun send(payload: Map<String,String>){

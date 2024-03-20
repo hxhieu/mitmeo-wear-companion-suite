@@ -7,6 +7,8 @@ import com.facebook.react.bridge.WritableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.WearableListenerService
+import com.mitmeo.mitmeocompanionapp.MessageKey
+import com.mitmeo.mitmeocompanionapp.MessageType
 import kotlinx.serialization.json.Json
 
 class MessagingService : WearableListenerService() {
@@ -22,27 +24,18 @@ class MessagingService : WearableListenerService() {
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
         super.onMessageReceived(messageEvent)
-        val msg = messageEvent.data.toString(Charsets.UTF_8)
-        Log.d(logHeader, "received '$msg'")
-        val payload = Json.decodeFromString<Map<String, String>>(msg)
-        val toast = Toast.makeText(this.applicationContext, msg, Toast.LENGTH_LONG)
+        val receivedPayload = Json.decodeFromString<Map<String,String>>(messageEvent.data.toString(Charsets.UTF_8))
+        Log.d(logHeader, "received $receivedPayload")
 
-        //sendJsEvent("")
-
-        when (msg) {
-//            MESSAGE_BATTERY_INFO -> {
-//                val batteryStatus: Intent? =
-//                    IntentFilter(Intent.ACTION_BATTERY_CHANGED).let { i ->
-//                        this.applicationContext.registerReceiver(null, i)
-//                    }
-//                val batteryPct: Float? = batteryStatus?.let { intent ->
-//                    val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
-//                    val scale: Int = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
-//                    level * 100 / scale.toFloat()
-//                }
-//                toast.setText(batteryPct.toString())
-//            }
+        when (val msgType = receivedPayload[MessageKey.__TYPE__.name]) {
+            MessageType.BATTERY_INFO.name -> {
+                val pct = receivedPayload[MessageKey.BATTERY_PCT.name]
+                Toast.makeText(
+                    this.applicationContext,
+                    pct,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
-        toast.show()
     }
 }

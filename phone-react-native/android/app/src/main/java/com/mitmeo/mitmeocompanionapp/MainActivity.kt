@@ -5,6 +5,9 @@ import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
 
+// TODO: Better way?
+var mainActivityInstance: MainActivity = MainActivity()
+
 class MainActivity : ReactActivity() {
 
   /**
@@ -19,4 +22,9 @@ class MainActivity : ReactActivity() {
    */
   override fun createReactActivityDelegate(): ReactActivityDelegate =
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+
+    override fun onResume() {
+        super.onResume()
+        mainActivityInstance = this
+    }
 }

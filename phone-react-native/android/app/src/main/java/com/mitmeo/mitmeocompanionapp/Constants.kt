@@ -1,4 +1,4 @@
-package com.mitmeo.mitmeocompanionwear
+package com.mitmeo.mitmeocompanionapp
 
 // TODO: Move this to shared package
 
