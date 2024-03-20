@@ -9,7 +9,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 class BatteryInfo {
 
-    private var pct: Float? = 0f
+    var pct: Float? = 0f
+        private  set;
 
     constructor(){
         val batteryStatus: Intent? =

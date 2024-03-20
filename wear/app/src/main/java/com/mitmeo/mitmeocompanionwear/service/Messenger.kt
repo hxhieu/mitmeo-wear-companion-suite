@@ -8,14 +8,16 @@ import com.google.android.gms.wearable.Wearable
 import com.mitmeo.mitmeocompanionwear.MITMEO_COMPANION_MESSAGING_PATH
 import com.mitmeo.mitmeocompanionwear.MITMEO_COMPANION_WEAR_CAPABILITY
 import com.mitmeo.mitmeocompanionwear.presentation.mainActivityInstance
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class Messenger() {
     private val messageClient by lazy { Wearable.getMessageClient(mainActivityInstance) }
     private val capabilityClient by lazy { Wearable.getCapabilityClient(mainActivityInstance) }
-    private val logName = Messenger::class.simpleName
+    private val logName = MITMEO_COMPANION_WEAR_CAPABILITY
 
-    fun send(payload: ByteArray){
-        Log.d(logName, "Sending payload")
+    fun send(payload: Map<String,String>){
+        Log.d(logName, "sending payload $payload")
         val capabilityInfo: CapabilityInfo = Tasks.await(
             capabilityClient
                 .getCapability(
@@ -28,15 +30,15 @@ class Messenger() {
             messageClient.sendMessage(
                 n.id,
                 MITMEO_COMPANION_MESSAGING_PATH,
-                payload
+                Json.encodeToString(payload).toByteArray(Charsets.UTF_8)
             ).apply {
                 addOnSuccessListener { _ ->
-                    Log.d(logName, "Sent successfully ${n.displayName}")
+                    Log.d(logName, "sent successfully ${n.displayName}")
                 }
                 addOnFailureListener { e ->
                     Log.e(
                         logName,
-                        "Sent failed ${n.displayName}\nerr: ${e.message}"
+                        "sent failed ${n.displayName}\nerr: ${e.message}"
                     )
                 }
             }

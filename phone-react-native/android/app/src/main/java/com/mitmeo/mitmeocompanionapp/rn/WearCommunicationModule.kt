@@ -20,11 +20,14 @@ class WearCommunicationModule(reactContext: ReactApplicationContext) :
     private val capabilityClient by lazy { Wearable.getCapabilityClient(this.currentActivity!!) }
     //private val nodeClient by lazy { Wearable.getNodeClient(this.currentActivity!!) }
 
+    // TODO: Shared module
+    private  val logHeader = "mitmeo_companion_wear"
+    
     override fun getName() = "WearCommunicationModule"
 
     @ReactMethod
     fun requestBatteryInfo() {
-        Log.d(name, "requestBatteryInfo()")
+        Log.d(logHeader, "requestBatteryInfo()")
         val capabilityInfo: CapabilityInfo = Tasks.await(
             capabilityClient
                 .getCapability(
@@ -40,11 +43,11 @@ class WearCommunicationModule(reactContext: ReactApplicationContext) :
                 MESSAGE_BATTERY_INFO.toByteArray(Charsets.UTF_8)
             ).apply {
                 addOnSuccessListener { _ ->
-                    Log.d(name, "requestBatteryInfo() success sent ${n.displayName}")
+                    Log.d(logHeader, "requestBatteryInfo() success sent ${n.displayName}")
                 }
                 addOnFailureListener { e ->
                     Log.e(
-                        name,
+                        logHeader,
                         "requestBatteryInfo() failed sent ${n.displayName}\nerr: ${e.message}"
                     )
                 }
