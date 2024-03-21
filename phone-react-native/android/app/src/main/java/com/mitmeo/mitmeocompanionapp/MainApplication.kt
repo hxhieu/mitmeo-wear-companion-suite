@@ -1,7 +1,6 @@
 package com.mitmeo.mitmeocompanionapp
 
 import android.app.Application
-import com.mitmeo.mitmeocompanionapp.WearPackage
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
@@ -12,6 +11,7 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.flipper.ReactNativeFlipper
 import com.facebook.soloader.SoLoader
+import com.mitmeo.mitmeocompanionapp.rn.WearPackage
 
 class MainApplication : Application(), ReactApplication {
 

@@ -80,3 +80,4 @@ yarn-error.log
 .externalNativeBuild
 .cxx
 local.properties
+/android/app/src/main/assets
