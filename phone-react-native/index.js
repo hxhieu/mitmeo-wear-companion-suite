@@ -4,6 +4,7 @@
 
 import {AppRegistry} from 'react-native';
 import {RealmProvider} from '@realm/react';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import App from './App';
 import {name as appName} from './app.json';
@@ -17,7 +18,9 @@ function AppWrapper() {
   };
   return (
     <RealmProvider {...realmConfig}>
-      <App />
+      <SafeAreaProvider>
+        <App />
+      </SafeAreaProvider>
     </RealmProvider>
   );
 }
