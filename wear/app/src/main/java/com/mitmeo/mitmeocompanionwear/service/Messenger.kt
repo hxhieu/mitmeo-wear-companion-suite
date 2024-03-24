@@ -11,12 +11,12 @@ import com.mitmeo.mitmeocompanionwear.MITMEO_COMPANION_WEAR_CAPABILITY
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class Messenger(private  val activity: Activity) {
+class Messenger(private val activity: Activity) {
     private val messageClient by lazy { Wearable.getMessageClient(activity) }
     private val capabilityClient by lazy { Wearable.getCapabilityClient(activity) }
     private val logName = MITMEO_COMPANION_WEAR_CAPABILITY
 
-    fun send(payload: Map<String,String>){
+    fun send(payload: Map<String, String>) {
         Log.d(logName, "sending payload $payload")
         val capabilityInfo: CapabilityInfo = Tasks.await(
             capabilityClient

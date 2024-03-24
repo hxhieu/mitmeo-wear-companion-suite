@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -7,6 +7,7 @@ import {
   View,
   Button,
   NativeModules,
+  NativeEventEmitter,
 } from 'react-native';
 import {useQuery, useRealm} from '@realm/react';
 
@@ -24,6 +25,18 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  useEffect(() => {
+    const eventEmitter = new NativeEventEmitter(WearCommunicationModule);
+    let eventListener = eventEmitter.addListener('BATTERY_INFO', event => {
+      console.log(event); // "someValue"
+    });
+
+    // Removes the listener once unmounted
+    return () => {
+      eventListener.remove();
+    };
+  }, []);
 
   const test = useQuery(AppSetting);
   console.log(test.at(0));
