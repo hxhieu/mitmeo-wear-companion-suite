@@ -17,7 +17,7 @@ class Messenger(private val activity: Activity) {
 
     private val logName = MITMEO_COMPANION_WEAR_CAPABILITY
 
-    fun send(payload: Map<String,String>){
+    fun send(payload: Map<String, String>) {
         Log.d(logName, "sending payload $payload")
         val capabilityInfo: CapabilityInfo = Tasks.await(
             capabilityClient

@@ -28,7 +28,7 @@ import com.mitmeo.mitmeocompanionwear.R
 import com.mitmeo.mitmeocompanionwear.presentation.theme.MitmeocompanionwearTheme
 
 // TODO: Better way?
-var mainActivityInstance: MainActivity = MainActivity()
+lateinit var mainActivityInstance: MainActivity
 
 class MainActivity : ComponentActivity() {
 

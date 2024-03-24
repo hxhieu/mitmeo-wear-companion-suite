@@ -10,9 +10,9 @@ import kotlinx.serialization.Serializable
 class BatteryInfo {
 
     var pct: Float? = 0f
-        private  set;
+        private set;
 
-    constructor(){
+    constructor() {
         val batteryStatus: Intent? =
             IntentFilter(Intent.ACTION_BATTERY_CHANGED).let { i ->
                 mainActivityInstance.applicationContext.registerReceiver(null, i)

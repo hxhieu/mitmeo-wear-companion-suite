@@ -13,10 +13,12 @@ import kotlinx.serialization.json.Json
 class MessagingService : WearableListenerService() {
 
     private val logHeader = MITMEO_COMPANION_WEAR_CAPABILITY
-    
+
     override fun onMessageReceived(messageEvent: MessageEvent) {
         super.onMessageReceived(messageEvent)
-        val receivedPayload = Json.decodeFromString<Map<String,String>>(messageEvent.data.toString(Charsets.UTF_8))
+        val receivedPayload =
+            Json.decodeFromString<Map<String, String>>(messageEvent.data.toString(Charsets.UTF_8))
+
         Log.d(logHeader, "received $receivedPayload")
 
         val sendPayload = receivedPayload.toMutableMap()
