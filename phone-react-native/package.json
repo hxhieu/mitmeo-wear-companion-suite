@@ -9,7 +9,8 @@
     "start": "react-native start",
     "test": "jest",
     "bundle": "react-native bundle --dev false --platform android --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res",
-    "build:android:debug": "cd android && gradlew assembleDebug && cd .."
+    "android:build:debug": "cd android && gradlew assembleDebug && cd ..",
+    "android:install": "adb install ./android/app/build/outputs/apk/debug/app-debug.apk"
   },
   "dependencies": {
     "@realm/react": "^0.6.2",
