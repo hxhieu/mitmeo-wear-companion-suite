@@ -5,18 +5,27 @@ import {
   StatusBar,
   useColorScheme,
   View,
-  Button,
   NativeModules,
-  NativeEventEmitter,
+  AppState,
+  AppStateStatus,
 } from 'react-native';
+
 import {useQuery, useRealm} from '@realm/react';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import {AppSetting} from './src/models/AppSetting';
 import {BSON} from 'realm';
+import Wear from './src/views/Wear';
 
 const {WearCommunicationModule} = NativeModules;
+
+function appStateHandler(state: AppStateStatus) {
+  console.log(state);
+  if (state === 'active') {
+    WearCommunicationModule.requestBatteryInfo();
+  }
+}
 
 function App(): React.JSX.Element {
   const realm = useRealm();
@@ -27,15 +36,8 @@ function App(): React.JSX.Element {
   };
 
   useEffect(() => {
-    const eventEmitter = new NativeEventEmitter(WearCommunicationModule);
-    let eventListener = eventEmitter.addListener('BATTERY_INFO', event => {
-      console.log(event); // "someValue"
-    });
-
-    // Removes the listener once unmounted
-    return () => {
-      eventListener.remove();
-    };
+    WearCommunicationModule.requestBatteryInfo();
+    AppState.addEventListener('change', appStateHandler);
   }, []);
 
   const test = useQuery(AppSetting);
@@ -62,12 +64,7 @@ function App(): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Button
-            title="Click me!"
-            onPress={() => {
-              WearCommunicationModule.requestBatteryInfo();
-            }}
-          />
+          <Wear />
         </View>
       </ScrollView>
     </SafeAreaView>

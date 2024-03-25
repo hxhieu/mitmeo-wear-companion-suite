@@ -20,7 +20,7 @@ class BatteryInfo {
         pct = batteryStatus?.let { intent ->
             val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
             val scale: Int = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
-            level * 100 / scale.toFloat()
+            level / scale.toFloat()
         }
     }
 }
